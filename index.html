@@ -1,0 +1,336 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranitha Kondipamula - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .tech-tag {
+            background: #E8F5FF;
+            color: #1D4ED8;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            display: inline-block;
+            margin: 0.25rem;
+            font-size: 0.875rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #3B82F6, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="section-container py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-blue-600">Pranitha K.</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
+                    <a href="#interests" class="hover:text-blue-600 transition-colors">Interests</a>
+                    <a href="#skills" class="hover:text-blue-600 transition-colors">Skills</a>
+                    <a href="#experience" class="hover:text-blue-600 transition-colors">Experience</a>
+                    <a href="#projects" class="hover:text-blue-600 transition-colors">Projects</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center pt-16">
+        <div class="section-container text-center text-white">
+            <h1 class="text-5xl font-bold mb-6">Pranitha Kondipamula</h1>
+            <p class="text-2xl mb-12">Data & Machine Learning Engineer</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="assets/resume/Pranitha.Kondipamula___DataAnalystEx_updated.pdf" target="_blank" 
+                   class="flex items-center px-6 py-3 bg-white text-blue-600 rounded-full hover:bg-opacity-90 transition-all duration-300">
+                    <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M13,13V18H15V13H13M9,13V18H11V13H9Z"/>
+                    </svg>
+                    Resume
+                </a>
+                <a href="mailto:pranitha.kondipamula@gmail.com" 
+                   class="flex items-center px-6 py-3 bg-green-500 text-white rounded-full hover:bg-opacity-90 transition-all duration-300">
+                    <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4M17,17H7V15H17M17,13H7V11H17M20,9H17V6H20"/>
+                    </svg>
+                    Contact Me
+                </a>
+                <a href="https://www.linkedin.com/in/pranithak23/" target="_blank"
+                   class="flex items-center px-6 py-3 bg-[#0077b5] text-white rounded-full hover:bg-opacity-90 transition-all duration-300">
+                    <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/PranithaKondipamula" target="_blank"
+                   class="flex items-center px-6 py-3 bg-[#333] text-white rounded-full hover:bg-opacity-90 transition-all duration-300">
+                    <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="section-container">
+            <h2 class="section-title">About Me</h2>
+            <div class="max-w-4xl mx-auto text-lg leading-relaxed text-gray-700">
+                <p class="mb-6">
+                    Results-driven <span class="font-semibold text-blue-600">Data Analytics and Information Systems</span> graduate student with a strong foundation in <span class="font-semibold text-blue-600">machine learning, statistical and deep learning model development</span>. Proficient in <span class="font-semibold text-blue-600">Python, PyTorch, TensorFlow</span> and <span class="font-semibold text-blue-600">NLP libraries/frameworks</span> for implementing AI algorithms.
+                </p>
+                <p class="mb-6">
+                    Experienced in developing AI-powered solutions, including <span class="font-semibold text-blue-600">LLM-based chatbots</span> and emotion recognition systems, AI architectures, foundation models, and reasoning systems. Skilled in conducting <span class="font-semibold text-blue-600">quantitative</span> and <span class="font-semibold text-blue-600">qualitative model validation</span>.
+                </p>
+                <p>
+                    Skilled in leveraging cloud platforms like Oracle Cloud and Snowflake for data warehousing and <span class="font-semibold text-blue-600">ML model deployment</span>. Demonstrated ability to extract actionable insights from complex datasets, optimize machine learning models, and implement data-driven solutions across various domains.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Section -->
+    <section id="interests" class="py-20 bg-gray-50">
+        <div class="section-container">
+            <h2 class="section-title">Interests</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="flex justify-center mb-6">
+                        <svg class="w-16 h-16 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-3-8c0-1.66 1.34-3 3-3s3 1.34 3 3-1.34 3-3 3-3-1.34-3-3z"/>
+                            <path d="M15 9l-3-3m0 0L9 9m3-3v12"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center text-blue-600">Machine Learning & AI</h3>
+                    <p class="text-gray-600 text-center">Passionate about developing innovative ML solutions using neural networks and deep learning. Specifically interested in NLP, LLMs, and RAG architectures for building intelligent systems that can understand and process human language effectively.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="flex justify-center mb-6">
+                        <svg class="w-16 h-16 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <path d="M12 11v5m0 0v3m0-3h3m-3 0H9"/>
+                            <path d="M9 7h6m-6 4h6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center text-blue-600">Data Engineering & Analytics</h3>
+                    <p class="text-gray-600 text-center">Focused on building robust data pipelines and ETL processes using tools like Apache Airflow and Snowflake. Experienced in data warehousing, real-time analytics, and developing scalable solutions for complex data problems.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="flex justify-center mb-6">
+                        <svg class="w-16 h-16 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12s4.48 10 10 10 10-4.48 10-10z"/>
+                            <path d="M12 16v-4m0 0V8m0 4h4m-4 0H8"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center text-blue-600">Cloud & MLOps</h3>
+                    <p class="text-gray-600 text-center">Dedicated to implementing ML solutions in cloud environments using Oracle Cloud and Snowflake. Experienced in model deployment, monitoring, and maintenance with a focus on building production-ready ML systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white">
+        <div class="section-container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Programming & Frameworks -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <h3 class="text-xl font-bold mb-4 text-blue-600">Programming & Frameworks</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Python (Pandas, NumPy, Scikit-learn)</li>
+                        <li>• TensorFlow, Keras, PyTorch</li>
+                        <li>• R, SQL, Shell Scripting</li>
+                        <li>• C, C++, Scala, Java</li>
+                    </ul>
+                </div>
+
+                <!-- Databases & ETL -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <h3 class="text-xl font-bold mb-4 text-blue-600">Databases & ETL</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• PostgreSQL, MySQL, MS SQL Server</li>
+                        <li>• NoSQL, SAP HANA, Snowflake</li>
+                        <li>• Apache Airflow, Talend</li>
+                        <li>• SQL-based ETL processes</li>
+                    </ul>
+                </div>
+
+                <!-- Machine Learning & AI -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <h3 class="text-xl font-bold mb-4 text-blue-600">Machine Learning & AI</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Classification & Clustering</li>
+                        <li>• Neural Networks, Deep Learning</li>
+                        <li>• NLP, LLM Integration, RAG</li>
+                        <li>• Model Validation & Optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-gray-50">
+        <div class="section-container">
+            <h2 class="section-title">Professional Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- AT&T Certificate -->
+                <div class="bg-white rounded-xl shadow-lg p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-full h-64 mb-6 overflow-hidden rounded-lg">
+                        <img 
+                            src="./assets/images/att_cert.png" 
+                            alt="AT&T Technology Academy Certificate" 
+                            class="w-full h-full object-contain"
+                            loading="lazy"
+                        >
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-blue-600 mb-2">AT&T Technology Academy</h3>
+                    <p class="text-gray-600 text-center">2024 Technology Professional</p>
+                </div>
+                
+                <!-- Oracle Certificate -->
+                <div class="bg-white rounded-xl shadow-lg p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-full h-64 mb-6 overflow-hidden rounded-lg">
+                        <img 
+                            src="./assets/images/oracle_cert.png" 
+                            alt="Oracle Cloud Infrastructure Certificate" 
+                            class="w-full h-full object-contain"
+                            loading="lazy"
+                        >
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-blue-600 mb-2">Oracle Cloud Infrastructure</h3>
+                    <p class="text-gray-600 text-center">Generative AI Professional</p>
+                </div>
+
+                <!-- Snowflake Certificate -->
+                <div class="bg-white rounded-xl shadow-lg p-8 hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-full h-64 mb-6 overflow-hidden rounded-lg">
+                        <img 
+                            src="./assets/images/snowflake_cert.png" 
+                            alt="Snowflake Workshop Certificate" 
+                            class="w-full h-full object-contain"
+                            loading="lazy"
+                        >
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-blue-600 mb-2">Northstar Gen AI/ML</h3>
+                    <p class="text-gray-600 text-center">Snowflake Workshop 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-50">
+        <div class="section-container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold">Graduate Research Assistant - Machine Learning</h3>
+                    <p class="text-blue-600 mb-4">Texas State University | Aug 2024 - Present</p>
+                    <ul class="space-y-2">
+                        <li>• Developed BERT-based ML model for email phishing detection</li>
+                        <li>• Designed risk scoring module combining ML algorithms</li>
+                        <li>• Established model risk management framework</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold">Research Data Analyst</h3>
+                    <p class="text-blue-600 mb-4">KRR Innovations | Jun 2020 - May 2023</p>
+                    <ul class="space-y-2">
+                        <li>• Led ML-driven predictive analytics project, increasing efficiency by 22%</li>
+                        <li>• Created Tableau dashboards reducing report generation by 40%</li>
+                        <li>• Performed NLP analysis leading to 30% higher adoption rate</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="section-container">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <!-- LLM Chatbot Project -->
+            <div class="bg-gray-50 rounded-xl shadow-lg p-8 mb-8">
+                <a href="https://github.com/PranithaKondipamula/llm-powered-chatbot" target="_blank" class="hover:text-blue-600 transition-colors">
+                    <h3 class="text-2xl font-bold mb-2">LLM-Powered Chatbot with RAG</h3>
+                </a>
+                <p class="text-gray-600 mb-4">July 2024</p>
+                <p class="text-gray-700 mb-6">
+                    Developed an intelligent chatbot using LangChain and Oracle Database 23c AI Vector Search. Features include advanced document processing, vector embeddings for semantic search, and optimized RAG workflow for enhanced Q&A capabilities.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tech-tag">LangChain</span>
+                    <span class="tech-tag">Oracle AI</span>
+                    <span class="tech-tag">RAG</span>
+                    <span class="tech-tag">Vector Store</span>
+                    <span class="tech-tag">PyPDF2</span>
+                    <span class="tech-tag">Cohere API</span>
+                </div>
+            </div>
+
+            <!-- Adobe Support Case Project -->
+            <div class="bg-gray-50 rounded-xl shadow-lg p-8 mb-8">
+                <a href="https://github.com/PranithaKondipamula/adobe-support-classification" target="_blank" class="hover:text-blue-600 transition-colors">
+                    <h3 class="text-2xl font-bold mb-2">Adobe Support Case Classification</h3>
+                </a>
+                <p class="text-gray-600 mb-4">January 2024</p>
+                <p class="text-gray-700 mb-6">
+                    Built a sophisticated ML framework achieving 90% accuracy in categorizing Adobe support cases. Implemented MLPClassifier with GridSearchCV for optimal feature extraction and model tuning.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Scikit-learn</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">NLP</span>
+                </div>
+            </div>
+
+            <!-- Sales Forecasting Project -->
+            <div class="bg-gray-50 rounded-xl shadow-lg p-8">
+                <a href="https://github.com/PranithaKondipamula/sales-forecasting-system" target="_blank" class="hover:text-blue-600 transition-colors">
+                    <h3 class="text-2xl font-bold mb-2">ML-Powered Sales Forecasting</h3>
+                </a>
+                <p class="text-gray-600 mb-4">December 2023</p>
+                <p class="text-gray-700 mb-6">
+                    Engineered an advanced sales forecasting system using Snowflake's ML capabilities. Features automated anomaly detection, real-time insights, and streamlined workflow automation.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tech-tag">Snowflake ML</span>
+                    <span class="tech-tag">Snowpark Python</span>
+                    <span class="tech-tag">Time Series</span>
+                    <span class="tech-tag">Data Pipeline</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="section-container text-center">
+            <p class="text-gray-400">© 2024 Pranitha Kondipamula. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
