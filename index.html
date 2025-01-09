@@ -31,26 +31,26 @@
             -webkit-text-fill-color: transparent;
         }
         /* Add the new code here */
-  @keyframes scroll {
+@keyframes scroll {
     0% {
-        transform: translateX(0);
+        transform: translateX(-33.33%);
     }
     100% {
-        transform: translateX(calc(-250px * 10)); /* Adjust based on number of logos */
+        transform: translateX(0);
     }
+}
+
+.logo-container {
+    width: fit-content;
+    display: flex;
 }
 
 .animate-scroll {
-    animation: scroll 25s linear infinite;
-    display: flex;
+    animation: scroll 30s linear infinite;
+    will-change: transform;
 }
 
-.logo-track {
-    display: flex;
-    width: fit-content;
-}
-
-.logo-banner:hover .animate-scroll {
+.animate-scroll:hover {
     animation-play-state: paused;
 }
     </style>
@@ -268,8 +268,9 @@
     <h3 class="text-xl font-bold text-center text-blue-600 mb-8">Technology Stack</h3>
     
     <div class="relative w-full overflow-hidden">
-        <div class="animate-scroll">
-            <div class="logo-track flex space-x-16 py-4">
+        <div class="logo-container flex">
+            <!-- First set of logos -->
+            <div class="flex animate-scroll space-x-16 py-4">
             <!-- Python -->
             <div class="flex-shrink-0 w-20 h-20">
                 <i class="devicon-python-plain colored text-7xl"></i>
@@ -352,23 +353,23 @@
 
            <!-- Power BI -->
            <div class="flex-shrink-0 w-20 h-20">
-    <img src="https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg" class="w-full h-full object-contain" alt="Power BI">
-</div>
+                <img src="https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg" class="w-full h-full object-contain" alt="Power BI">
+        </div>
 
-<!-- Tableau -->
-<div class="flex-shrink-0 w-20 h-20">
-    <img src="https://seeklogo.com/images/T/tableau-software-logo-F1CE2CA54E-seeklogo.com.png" class="w-full h-full object-contain" alt="Tableau">
-</div>
+           <!-- Tableau -->
+          <div class="flex-shrink-0 w-20 h-20">
+              <img src="https://www.svgrepo.com/show/354478/tableau.svg" class="w-full h-full object-contain" alt="Tableau">
+          </div>
 
-<!-- Snowflake -->
-<div class="flex-shrink-0 w-20 h-20">
-    <img src="https://seeklogo.com/images/S/snowflake-logo-B3C392B06D-seeklogo.com.png" class="w-full h-full object-contain" alt="Snowflake">
-</div>
+           <!--  Snowflake logo -->
+          <div class="flex-shrink-0 w-20 h-20">
+             <img src="https://www.vectorlogo.zone/logos/snowflake/snowflake-ar21.svg" class="w-full h-full object-contain" alt="Snowflake">
+           </div>
 
-<!-- SSRS -->
-<div class="flex-shrink-0 w-20 h-20">
-    <img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" class="w-full h-full object-contain" alt="SSRS">
-</div>
+           <!-- SSRS -->
+          <div class="flex-shrink-0 w-20 h-20">
+             <img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" class="w-full h-full object-contain" alt="SSRS">
+          </div>
 
             <!-- Duplicate first few logos for seamless scrolling -->
             <!-- [Previous duplicate section remains the same] -->
