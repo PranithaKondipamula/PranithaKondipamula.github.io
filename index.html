@@ -33,15 +33,21 @@
         /* Add the new code here */
   @keyframes scroll {
     0% {
-        transform: translateX(-100%);
+        transform: translateX(0);
     }
     100% {
-        transform: translateX(0);
+        transform: translateX(calc(-250px * 10)); /* Adjust based on number of logos */
     }
 }
 
 .animate-scroll {
-    animation: scroll 20s linear infinite; /* Changed from 30s to 20s for faster speed */
+    animation: scroll 25s linear infinite;
+    display: flex;
+}
+
+.logo-track {
+    display: flex;
+    width: fit-content;
 }
 
 .logo-banner:hover .animate-scroll {
@@ -262,7 +268,8 @@
     <h3 class="text-xl font-bold text-center text-blue-600 mb-8">Technology Stack</h3>
     
     <div class="relative w-full overflow-hidden">
-        <div class="flex animate-scroll space-x-16 py-4">
+        <div class="animate-scroll">
+            <div class="logo-track flex space-x-16 py-4">
             <!-- Python -->
             <div class="flex-shrink-0 w-20 h-20">
                 <i class="devicon-python-plain colored text-7xl"></i>
@@ -350,12 +357,12 @@
 
 <!-- Tableau -->
 <div class="flex-shrink-0 w-20 h-20">
-    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tableau/tableau-original.svg" class="w-full h-full object-contain" alt="Tableau">
+    <img src="https://seeklogo.com/images/T/tableau-software-logo-F1CE2CA54E-seeklogo.com.png" class="w-full h-full object-contain" alt="Tableau">
 </div>
 
 <!-- Snowflake -->
 <div class="flex-shrink-0 w-20 h-20">
-    <img src="https://www.svgrepo.com/show/331488/snowflake.svg" class="w-full h-full object-contain" alt="Snowflake">
+    <img src="https://seeklogo.com/images/S/snowflake-logo-B3C392B06D-seeklogo.com.png" class="w-full h-full object-contain" alt="Snowflake">
 </div>
 
 <!-- SSRS -->
