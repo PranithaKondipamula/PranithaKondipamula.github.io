@@ -98,16 +98,16 @@
     </nav>
 
 <!-- Hero Section with Background Image -->
-<section class="min-h-screen relative flex items-center justify-center">
-    <!-- Background Image - Adjusted for portrait orientation -->
-    <div class="absolute top-0 left-0 w-full h-full">
-<img src="assets/images/hero-background.jpg"
-     alt="Colorful background"
-     class="w-full h-full object-cover object-center"
-     style="object-position: center 25%;"
->
-        <!-- Slightly darkened overlay for better text visibility -->
-        <div class="absolute inset-0 bg-black bg-opacity-35"></div>
+<section class="min-h-screen relative flex items-center justify-center overflow-hidden">
+    <!-- Background Image Container -->
+    <div class="absolute inset-0 w-full h-full z-0">
+        <img src="assets/images/hero-background.jpg"
+             alt="Colorful background"
+             class="w-full h-full object-cover"
+             style="object-position: center center;"
+        >
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
     </div>
     
     <!-- Content -->
