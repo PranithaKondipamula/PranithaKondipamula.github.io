@@ -99,19 +99,19 @@
 
 <!-- Hero Section with Background Image -->
 <section class="min-h-screen relative flex items-center justify-center">
-    <!-- Background Image - Adjusted positioning -->
+    <!-- Background Image - Adjusted for portrait orientation -->
     <div class="absolute top-0 left-0 w-full h-full">
         <img src="./assets/images/hero-background.jpg" 
              alt="Colorful background" 
-             class="w-full h-full object-cover object-top"  <!-- Added object-top -->
-             style="margin-top: 0;"  <!-- Ensures image starts from very top -->
+             class="w-full h-full object-cover object-center"
+             style="object-position: center 25%;"  <!-- This helps center on your face -->
         >
-        <!-- Adjusted overlay to be slightly darker for better text visibility -->
-        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <!-- Slightly darkened overlay for better text visibility -->
+        <div class="absolute inset-0 bg-black bg-opacity-35"></div>
     </div>
     
-    <!-- Content - Adjusted positioning -->
-    <div class="section-container text-center text-white relative z-10 pt-20">  <!-- Added more top padding -->
+    <!-- Content -->
+    <div class="section-container text-center text-white relative z-10">
         <h1 class="text-5xl font-bold mb-6">Pranitha Kondipamula</h1>
         <p class="text-2xl mb-12">Data & Machine Learning Engineer</p>
         <div class="flex flex-wrap justify-center gap-4">
