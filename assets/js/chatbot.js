@@ -1,20 +1,27 @@
 // Initialize OpenAI configuration
-const OPENAI_API_KEY = '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'; // Replace with your actual API key
+const OPENAI_API_KEY = CONFIG.OPENAI_API_KEY;
 
 class PortfolioChatbot {
     constructor() {
         this.chatHistory = [];
         this.portfolioData = null;
+        this.initialize();
+    }
+
+    async initialize() {
+        await this.loadPortfolioData();
         this.initializeChatbot();
-        this.loadPortfolioData();
+        // Add welcome message
+        this.addMessageToChat('assistant', 'Hello! I'm Pranitha's AI assistant. Feel free to ask me about her qualifications, skills, or experience.');
     }
 
     async loadPortfolioData() {
         try {
-            const response = await fetch('/assets/data/pranitha_info.json');
+            const response = await fetch('./assets/data/pranitha_info.json');
             this.portfolioData = await response.json();
         } catch (error) {
             console.error('Error loading portfolio data:', error);
+            this.portfolioData = {}; // Set empty object as fallback
         }
     }
 
@@ -41,7 +48,7 @@ class PortfolioChatbot {
                 </div>
             </div>
             <button id="chat-trigger" class="fixed bottom-4 right-4 w-16 h-16 rounded-full shadow-lg hover:transform hover:scale-110 transition-transform duration-300 overflow-hidden border-2 border-blue-600">
-                <img src="assets/images/pranitha-profile.png" alt="AI Assistant" class="w-full h-full object-cover">
+                <img src="https://pranithaKondipamula.github.io/assets/images/pranitha-profile.png" alt="AI Assistant" class="w-full h-full object-cover">
             </button>
         `;
         document.body.insertAdjacentHTML('beforeend', chatInterface);
@@ -99,6 +106,9 @@ class PortfolioChatbot {
 
     async getAIResponse(message) {
         try {
+            if (!OPENAI_API_KEY || OPENAI_API_KEY === 'YOUR_API_KEY_HERE') {
+                throw new Error('OpenAI API key not configured');
+            }
             const portfolioContext = JSON.stringify(this.portfolioData);
             const response = await fetch('https://api.openai.com/v1/chat/completions', {
                 method: 'POST',
@@ -124,10 +134,21 @@ class PortfolioChatbot {
                 })
             });
 
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || 'API request failed');
+            }
+
             const data = await response.json();
             return data.choices[0].message.content;
         } catch (error) {
             console.error('Error calling OpenAI API:', error);
+            if (error.message.includes('API key')) {
+                return "I apologize, but I'm not properly configured yet. Please make sure the OpenAI API key is set correctly.";
+            }
+            if (error.message.includes('loading portfolio data')) {
+                return "I apologize, but I'm having trouble accessing Pranitha's information. Please try again in a moment.";
+            }
             throw error;
         }
     }
@@ -181,5 +202,5 @@ class PortfolioChatbot {
 
 // Initialize chatbot when the page loads
 window.addEventListener('load', () => {
-    new PortfolioChatbot();
+    const chatbot = new PortfolioChatbot();
 }); 
