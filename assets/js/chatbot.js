@@ -41,7 +41,7 @@ class PortfolioChatbot {
                 </div>
             </div>
             <button id="chat-trigger" class="fixed bottom-4 right-4 w-16 h-16 rounded-full shadow-lg hover:transform hover:scale-110 transition-transform duration-300 overflow-hidden border-2 border-blue-600">
-                <img src="assets/images/pranitha-profile.jpg" alt="AI Assistant" class="w-full h-full object-cover">
+                <img src="assets/images/pranitha-profile.png" alt="AI Assistant" class="w-full h-full object-cover">
             </button>
         `;
         document.body.insertAdjacentHTML('beforeend', chatInterface);
