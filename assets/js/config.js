@@ -1,3 +1,3 @@
 const CONFIG = {
-    OPENAI_API_KEY: 'your-actual-openai-api-key'
+    OPENAI_API_KEY: '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'
 }; 
