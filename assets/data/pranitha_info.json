@@ -1,0 +1,72 @@
+{
+    "personal_info": {
+        "name": "Pranitha Kondipamula",
+        "title": "Data & Machine Learning Engineer",
+        "email": "pranitha.kondipamula@gmail.com",
+        "linkedin": "https://www.linkedin.com/in/pranithak23/",
+        "github": "https://github.com/PranithaKondipamula"
+    },
+    "education": {
+        "current": {
+            "degree": "Master's in Data Analytics and Information Systems",
+            "institution": "Texas State University",
+            "location": "San Marcos, TX",
+            "period": "2023 - Present"
+        }
+    },
+    "detailed_experience": {
+        "graduate_research": {
+            "title": "Graduate Research Assistant - Machine Learning",
+            "company": "Texas State University",
+            "period": "Aug 2024 - Present",
+            "responsibilities": [
+                "Developed BERT-based ML model for email phishing detection",
+                "Designed risk scoring module combining ML algorithms with rule-based analysis",
+                "Established model risk management framework"
+            ],
+            "technologies": ["BERT", "NLP", "Python", "Machine Learning"]
+        },
+        "hpc_research": {
+            "title": "High-Performance GPU Computing Research Assistant",
+            "company": "Texas State University",
+            "period": "Jun 2023 - Jul 2024",
+            "responsibilities": [
+                "Mastered supercomputing, Linux, and LEAP 2 Cluster access",
+                "Utilized SLURM Manager for job submission and AI model training",
+                "Optimized AI performance using GPU computing"
+            ],
+            "technologies": ["GPU Computing", "Linux", "SLURM", "Python"]
+        },
+        "data_analyst": {
+            "title": "Research Data Analyst",
+            "company": "KRR Innovations Private Ltd",
+            "period": "Jun 2020 - May 2023",
+            "responsibilities": [
+                "Led ML-driven predictive analytics project",
+                "Created Tableau data visualization dashboard",
+                "Performed NLP analysis on social media data"
+            ],
+            "technologies": ["Machine Learning", "Tableau", "NLP", "Python"]
+        }
+    },
+    "skills": {
+        "programming": ["Python", "R", "SQL", "C++", "Java", "Scala"],
+        "ml_frameworks": ["TensorFlow", "PyTorch", "Scikit-learn", "Keras"],
+        "data_analysis": ["Pandas", "NumPy", "Statistical Analysis", "Data Visualization"],
+        "databases": ["PostgreSQL", "MySQL", "Snowflake", "Oracle"],
+        "tools": ["Tableau", "Power BI", "Git", "Docker"],
+        "cloud": ["Oracle Cloud", "Snowflake"]
+    },
+    "projects": {
+        "llm_chatbot": {
+            "title": "LLM-Powered Chatbot with RAG",
+            "description": "Developed intelligent chatbot using LangChain and Oracle Database 23c AI Vector Search",
+            "technologies": ["LangChain", "Oracle AI", "RAG", "Vector Store", "Cohere API"]
+        },
+        "adobe_case": {
+            "title": "Adobe Support Case Classification",
+            "description": "Built ML framework achieving 90% accuracy in categorizing support cases",
+            "technologies": ["Python", "Scikit-learn", "TensorFlow", "NLP"]
+        }
+    }
+} 
