@@ -26,7 +26,6 @@ class PortfolioChatbot {
         }
     }
 
-
     initializeChatbot() {
         console.log('PortfolioChatbot: Creating chat interface');
         const chatInterface = `
