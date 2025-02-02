@@ -16,7 +16,8 @@ class PortfolioChatbot {
 
     async loadPortfolioData() {
         try {
-            const response = await fetch('/pranitha_info.json');
+            // Corrected path to match the actual file structure
+            const response = await fetch('./assets/pranitha_info.json');
             this.portfolioData = await response.json();
             console.log('Portfolio data loaded:', this.portfolioData);
         } catch (error) {
@@ -24,6 +25,7 @@ class PortfolioChatbot {
             this.portfolioData = {}; 
         }
     }
+
 
     initializeChatbot() {
         console.log('PortfolioChatbot: Creating chat interface');
