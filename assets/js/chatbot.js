@@ -1,16 +1,17 @@
 class PortfolioChatbot {
     constructor() {
-        console.log('Initializing chatbot...');
+        console.log('PortfolioChatbot: Constructor called');
         this.chatHistory = [];
         this.portfolioData = null;
         this.initialize();
     }
 
     async initialize() {
-        console.log('Loading portfolio data...');
+        console.log('PortfolioChatbot: Initializing...');
         await this.loadPortfolioData();
         this.initializeChatbot();
         this.addMessageToChat('assistant', 'Hello! I'm an AI assistant for Pranitha. Feel free to ask about her qualifications, skills, or experience.');
+        console.log('PortfolioChatbot: Initialization complete');
     }
 
     async loadPortfolioData() {
@@ -24,6 +25,7 @@ class PortfolioChatbot {
     }
 
     initializeChatbot() {
+        console.log('PortfolioChatbot: Creating chat interface');
         const chatInterface = `
             <div id="chatbot-container" class="fixed bottom-4 right-4 w-96 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 transform translate-y-full opacity-0 z-50">
                 <div class="bg-blue-600 p-4 flex justify-between items-center">
@@ -45,7 +47,7 @@ class PortfolioChatbot {
                 </div>
             </div>
             <button id="chat-trigger" class="fixed bottom-4 right-4 w-16 h-16 rounded-full shadow-lg hover:transform hover:scale-110 transition-transform duration-300 overflow-hidden border-2 border-blue-600">
-                <img src="assets/images/pranitha-profile.png" alt="AI Assistant" class="w-full h-full object-cover">
+                <img src="./assets/images/hero-background.jpg" alt="AI Assistant" class="w-full h-full object-cover">
             </button>
         `;
         document.body.insertAdjacentHTML('beforeend', chatInterface);
@@ -203,6 +205,7 @@ class PortfolioChatbot {
 }
 
 // Initialize chatbot when the page loads
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('PortfolioChatbot: Document ready, initializing chatbot');
     const chatbot = new PortfolioChatbot();
 }); 
