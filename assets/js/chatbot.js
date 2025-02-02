@@ -16,8 +16,9 @@ class PortfolioChatbot {
 
     async loadPortfolioData() {
         try {
-            const response = await fetch('./assets/data/pranitha_info.json');
+            const response = await fetch('/pranitha_info.json');
             this.portfolioData = await response.json();
+            console.log('Portfolio data loaded:', this.portfolioData);
         } catch (error) {
             console.error('Error loading portfolio data:', error);
             this.portfolioData = {}; 
@@ -27,7 +28,7 @@ class PortfolioChatbot {
     initializeChatbot() {
         console.log('PortfolioChatbot: Creating chat interface');
         const chatInterface = `
-            <div id="chatbot-container" class="fixed bottom-4 right-4 w-96 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 transform translate-y-full opacity-0 z-50">
+            <div id="chatbot-container" class="fixed bottom-4 right-4 w-96 bg-white rounded-lg shadow-xl overflow-hidden z-50">
                 <div class="bg-blue-600 p-4 flex justify-between items-center">
                     <h3 class="text-white font-bold">Ask me about Pranitha</h3>
                     <button id="minimize-chat" class="text-white hover:text-gray-200">
@@ -46,10 +47,19 @@ class PortfolioChatbot {
                     </div>
                 </div>
             </div>
-            <button id="chat-trigger" class="fixed bottom-4 right-4 w-16 h-16 rounded-full shadow-lg hover:transform hover:scale-110 transition-transform duration-300 overflow-hidden border-2 border-blue-600">
-                <img src="./assets/images/hero-background.jpg" alt="AI Assistant" class="w-full h-full object-cover">
+            <button id="chat-trigger" class="fixed bottom-4 right-4 bg-blue-600 w-16 h-16 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                </svg>
             </button>
         `;
+        
+        // Remove any existing chatbot elements
+        const existingContainer = document.getElementById('chatbot-container');
+        const existingTrigger = document.getElementById('chat-trigger');
+        if (existingContainer) existingContainer.remove();
+        if (existingTrigger) existingTrigger.remove();
+
         document.body.insertAdjacentHTML('beforeend', chatInterface);
         this.bindEvents();
     }
@@ -62,76 +72,89 @@ class PortfolioChatbot {
         const chatInput = document.getElementById('chat-input');
 
         chatTrigger.addEventListener('click', () => {
-            chatContainer.classList.remove('translate-y-full', 'opacity-0');
-            chatTrigger.classList.add('hidden');
+            chatTrigger.style.display = 'none';
+            chatContainer.style.display = 'block';
         });
 
         minimizeChat.addEventListener('click', () => {
-            chatContainer.classList.add('translate-y-full', 'opacity-0');
-            chatTrigger.classList.remove('hidden');
+            chatContainer.style.display = 'none';
+            chatTrigger.style.display = 'flex';
         });
 
         sendButton.addEventListener('click', () => this.handleUserMessage());
+        
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 this.handleUserMessage();
             }
         });
+
+        // Initially hide the chat container
+        chatContainer.style.display = 'none';
     }
 
     async handleUserMessage() {
         const chatInput = document.getElementById('chat-input');
-        const message = chatInput.value.trim().toLowerCase();
+        const message = chatInput.value.trim();
         
         if (!message) return;
 
-        this.addMessageToChat('user', chatInput.value.trim());
+        this.addMessageToChat('user', message);
         chatInput.value = '';
 
         this.addTypingIndicator();
+        
+        // Simulate thinking time
         setTimeout(() => {
             this.removeTypingIndicator();
-            const response = this.generateResponse(message);
+            const response = this.generateResponse(message.toLowerCase());
             this.addMessageToChat('assistant', response);
         }, 1000);
     }
 
     generateResponse(message) {
+        if (!this.portfolioData) {
+            return "I apologize, but I'm having trouble accessing Pranitha's information. Please try again in a moment.";
+        }
+
         // Keywords for different types of information
         const keywords = {
             education: ['education', 'degree', 'university', 'study', 'studied', 'college', 'academic'],
             skills: ['skills', 'technologies', 'programming', 'languages', 'tools', 'frameworks'],
-            experience: ['experience', 'work', 'job', 'position', 'career', 'research'],
+            experience: ['experience', 'work', 'job', 'position', 'career'],
             projects: ['projects', 'portfolio', 'developed', 'built', 'created'],
             contact: ['contact', 'email', 'phone', 'reach', 'connect'],
-            certifications: ['certifications', 'certificates', 'certified'],
             background: ['background', 'about', 'summary', 'overview']
         };
 
-        // Check for specific questions
-        if (message.includes('who are you') || message.includes('what can you do')) {
-            return "I'm an AI assistant for Pranitha's portfolio. I can tell you about her education, skills, work experience, projects, and more. What would you like to know?";
+        // Basic greeting and introduction
+        if (message.includes('hi') || message.includes('hello') || message.includes('hey')) {
+            return "Hello! I can tell you about Pranitha's education, skills, work experience, or projects. What would you like to know?";
         }
 
-        if (message.includes('contact') || message.includes('email') || message.includes('phone')) {
-            return `You can contact Pranitha at ${this.portfolioData.personal_info.email} or ${this.portfolioData.personal_info.phone}`;
+        // Check for contact information request
+        if (keywords.contact.some(word => message.includes(word))) {
+            return `You can contact Pranitha at ${this.portfolioData.personal_info.email}`;
         }
 
-        if (keywords.education.some(keyword => message.includes(keyword))) {
+        // Check for education information
+        if (keywords.education.some(word => message.includes(word))) {
             const edu = this.portfolioData.education.masters;
             return `Pranitha is pursuing a ${edu.degree} at ${edu.institution} (${edu.period}). Her coursework includes ${edu.relevant_coursework.join(', ')}.`;
         }
 
-        if (keywords.skills.some(keyword => message.includes(keyword))) {
+        // Check for skills information
+        if (keywords.skills.some(word => message.includes(word))) {
             const skills = this.portfolioData.skills;
-            return `Pranitha is skilled in:
-            - Programming: ${skills.programming.join(', ')}
-            - ML Frameworks: ${skills.ml_frameworks.join(', ')}
-            - Databases: ${skills.databases.join(', ')}
-            - Data Analysis: ${skills.data_analysis.slice(0, 3).join(', ')} and more`;
+            return `Pranitha's key skills include:
+            • Programming: ${skills.programming.join(', ')}
+            • ML Frameworks: ${skills.ml_frameworks.join(', ')}
+            • Data Analysis: ${skills.data_analysis.slice(0, 3).join(', ')}
+            Would you like to know more about any specific skill area?`;
         }
 
-        if (keywords.experience.some(keyword => message.includes(keyword))) {
+        // Check for experience information
+        if (keywords.experience.some(word => message.includes(word))) {
             const exp = this.portfolioData.detailed_experience;
             return `Pranitha's most recent roles include:
             1. ${exp.graduate_research.title} at ${exp.graduate_research.company}
@@ -140,7 +163,8 @@ class PortfolioChatbot {
             Would you like more details about any of these positions?`;
         }
 
-        if (keywords.projects.some(keyword => message.includes(keyword))) {
+        // Check for projects information
+        if (keywords.projects.some(word => message.includes(word))) {
             const projects = this.portfolioData.projects;
             return `Here are some of Pranitha's key projects:
             1. ${projects.llm_chatbot.title}
@@ -149,24 +173,19 @@ class PortfolioChatbot {
             Would you like to know more about any specific project?`;
         }
 
-        if (keywords.certifications.some(keyword => message.includes(keyword))) {
-            const certs = this.portfolioData.certifications;
-            return `Pranitha holds the following certifications:
-            ${certs.map(cert => `- ${cert.name} (${cert.year})`).join('\n')}`;
-        }
-
-        if (keywords.background.some(keyword => message.includes(keyword))) {
+        // Check for background/summary information
+        if (keywords.background.some(word => message.includes(word))) {
             return this.portfolioData.professional_summary;
         }
 
-        // Default response if no specific match is found
-        return "I can tell you about Pranitha's education, skills, work experience, projects, or certifications. What specific aspect would you like to know more about?";
+        // Default response
+        return "I can tell you about Pranitha's education, skills, work experience, or projects. What specific aspect would you like to know more about?";
     }
 
     addMessageToChat(role, message) {
         const chatMessages = document.getElementById('chat-messages');
         const messageElement = document.createElement('div');
-        messageElement.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'}`;
+        messageElement.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'} mb-4`;
         
         messageElement.innerHTML = `
             <div class="${role === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'} rounded-lg px-4 py-2 max-w-[75%]">
@@ -182,7 +201,7 @@ class PortfolioChatbot {
         const chatMessages = document.getElementById('chat-messages');
         const typingIndicator = document.createElement('div');
         typingIndicator.id = 'typing-indicator';
-        typingIndicator.className = 'flex justify-start';
+        typingIndicator.className = 'flex justify-start mb-4';
         typingIndicator.innerHTML = `
             <div class="bg-gray-200 text-gray-800 rounded-lg px-4 py-2">
                 <div class="flex space-x-2">
@@ -208,4 +227,4 @@ class PortfolioChatbot {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('PortfolioChatbot: Document ready, initializing chatbot');
     const chatbot = new PortfolioChatbot();
-}); 
+});
