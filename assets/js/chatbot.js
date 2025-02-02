@@ -16,13 +16,27 @@ class PortfolioChatbot {
 
     async loadPortfolioData() {
         try {
-            // Corrected path to match the actual file structure
-            const response = await fetch('./assets/pranitha_info.json');
+            // Try multiple paths for GitHub Pages compatibility
+            const response = await fetch('/pranitha_info.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             this.portfolioData = await response.json();
-            console.log('Portfolio data loaded:', this.portfolioData);
+            console.log('Portfolio data loaded successfully');
         } catch (error) {
             console.error('Error loading portfolio data:', error);
-            this.portfolioData = {}; 
+            // Fallback to relative path if absolute fails
+            try {
+                const fallbackResponse = await fetch('./pranitha_info.json');
+                if (!fallbackResponse.ok) {
+                    throw new Error(`HTTP error! status: ${fallbackResponse.status}`);
+                }
+                this.portfolioData = await fallbackResponse.json();
+                console.log('Portfolio data loaded successfully using fallback path');
+            } catch (fallbackError) {
+                console.error('Fallback also failed:', fallbackError);
+                this.portfolioData = {};
+            }
         }
     }
 
@@ -63,6 +77,10 @@ class PortfolioChatbot {
 
         document.body.insertAdjacentHTML('beforeend', chatInterface);
         this.bindEvents();
+
+        // Initially hide the chat container
+        const chatContainer = document.getElementById('chatbot-container');
+        chatContainer.style.display = 'none';
     }
 
     bindEvents() {
@@ -89,9 +107,6 @@ class PortfolioChatbot {
                 this.handleUserMessage();
             }
         });
-
-        // Initially hide the chat container
-        chatContainer.style.display = 'none';
     }
 
     async handleUserMessage() {
@@ -105,7 +120,6 @@ class PortfolioChatbot {
 
         this.addTypingIndicator();
         
-        // Simulate thinking time
         setTimeout(() => {
             this.removeTypingIndicator();
             const response = this.generateResponse(message.toLowerCase());
@@ -227,5 +241,5 @@ class PortfolioChatbot {
 // Initialize chatbot when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     console.log('PortfolioChatbot: Document ready, initializing chatbot');
-    const chatbot = new PortfolioChatbot();
+    window.portfolioChatbot = new PortfolioChatbot();
 });
