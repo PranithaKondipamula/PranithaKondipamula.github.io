@@ -1,18 +1,16 @@
-// Initialize OpenAI configuration
-const OPENAI_API_KEY = CONFIG.OPENAI_API_KEY;
-
 class PortfolioChatbot {
     constructor() {
+        console.log('Initializing chatbot...');
         this.chatHistory = [];
         this.portfolioData = null;
         this.initialize();
     }
 
     async initialize() {
+        console.log('Loading portfolio data...');
         await this.loadPortfolioData();
         this.initializeChatbot();
-        // Add welcome message
-        this.addMessageToChat('assistant', 'Hello! I'm Pranitha's AI assistant. Feel free to ask me about her qualifications, skills, or experience.');
+        this.addMessageToChat('assistant', 'Hello! I'm an AI assistant for Pranitha. Feel free to ask about her qualifications, skills, or experience.');
     }
 
     async loadPortfolioData() {
@@ -21,14 +19,13 @@ class PortfolioChatbot {
             this.portfolioData = await response.json();
         } catch (error) {
             console.error('Error loading portfolio data:', error);
-            this.portfolioData = {}; // Set empty object as fallback
+            this.portfolioData = {}; 
         }
     }
 
     initializeChatbot() {
-        // Create chat interface
         const chatInterface = `
-            <div id="chatbot-container" class="fixed bottom-4 right-4 w-96 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 transform translate-y-full opacity-0">
+            <div id="chatbot-container" class="fixed bottom-4 right-4 w-96 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 transform translate-y-full opacity-0 z-50">
                 <div class="bg-blue-600 p-4 flex justify-between items-center">
                     <h3 class="text-white font-bold">Ask me about Pranitha</h3>
                     <button id="minimize-chat" class="text-white hover:text-gray-200">
@@ -48,7 +45,7 @@ class PortfolioChatbot {
                 </div>
             </div>
             <button id="chat-trigger" class="fixed bottom-4 right-4 w-16 h-16 rounded-full shadow-lg hover:transform hover:scale-110 transition-transform duration-300 overflow-hidden border-2 border-blue-600">
-                <img src="https://pranithaKondipamula.github.io/assets/images/pranitha-profile.png" alt="AI Assistant" class="w-full h-full object-cover">
+                <img src="assets/images/pranitha-profile.png" alt="AI Assistant" class="w-full h-full object-cover">
             </button>
         `;
         document.body.insertAdjacentHTML('beforeend', chatInterface);
@@ -82,75 +79,86 @@ class PortfolioChatbot {
 
     async handleUserMessage() {
         const chatInput = document.getElementById('chat-input');
-        const message = chatInput.value.trim();
+        const message = chatInput.value.trim().toLowerCase();
         
         if (!message) return;
 
-        // Add user message to chat
-        this.addMessageToChat('user', message);
+        this.addMessageToChat('user', chatInput.value.trim());
         chatInput.value = '';
 
-        // Show typing indicator
         this.addTypingIndicator();
-
-        try {
-            const response = await this.getAIResponse(message);
+        setTimeout(() => {
             this.removeTypingIndicator();
+            const response = this.generateResponse(message);
             this.addMessageToChat('assistant', response);
-        } catch (error) {
-            this.removeTypingIndicator();
-            this.addMessageToChat('assistant', 'I apologize, but I encountered an error. Please try again.');
-            console.error('Error:', error);
-        }
+        }, 1000);
     }
 
-    async getAIResponse(message) {
-        try {
-            if (!OPENAI_API_KEY || OPENAI_API_KEY === 'YOUR_API_KEY_HERE') {
-                throw new Error('OpenAI API key not configured');
-            }
-            const portfolioContext = JSON.stringify(this.portfolioData);
-            const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${OPENAI_API_KEY}`
-                },
-                body: JSON.stringify({
-                    model: "gpt-4",
-                    messages: [
-                        {
-                            role: "system",
-                            content: `You are an AI assistant for Pranitha Kondipamula's portfolio website. Here is her detailed information: ${portfolioContext}. Use this information to provide accurate and relevant responses about Pranitha's qualifications, skills, and experience. When comparing with job requirements, focus on relevant skills and experience from this data.`
-                        },
-                        ...this.chatHistory,
-                        {
-                            role: "user",
-                            content: message
-                        }
-                    ],
-                    temperature: 0.7,
-                    max_tokens: 500
-                })
-            });
+    generateResponse(message) {
+        // Keywords for different types of information
+        const keywords = {
+            education: ['education', 'degree', 'university', 'study', 'studied', 'college', 'academic'],
+            skills: ['skills', 'technologies', 'programming', 'languages', 'tools', 'frameworks'],
+            experience: ['experience', 'work', 'job', 'position', 'career', 'research'],
+            projects: ['projects', 'portfolio', 'developed', 'built', 'created'],
+            contact: ['contact', 'email', 'phone', 'reach', 'connect'],
+            certifications: ['certifications', 'certificates', 'certified'],
+            background: ['background', 'about', 'summary', 'overview']
+        };
 
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.error?.message || 'API request failed');
-            }
-
-            const data = await response.json();
-            return data.choices[0].message.content;
-        } catch (error) {
-            console.error('Error calling OpenAI API:', error);
-            if (error.message.includes('API key')) {
-                return "I apologize, but I'm not properly configured yet. Please make sure the OpenAI API key is set correctly.";
-            }
-            if (error.message.includes('loading portfolio data')) {
-                return "I apologize, but I'm having trouble accessing Pranitha's information. Please try again in a moment.";
-            }
-            throw error;
+        // Check for specific questions
+        if (message.includes('who are you') || message.includes('what can you do')) {
+            return "I'm an AI assistant for Pranitha's portfolio. I can tell you about her education, skills, work experience, projects, and more. What would you like to know?";
         }
+
+        if (message.includes('contact') || message.includes('email') || message.includes('phone')) {
+            return `You can contact Pranitha at ${this.portfolioData.personal_info.email} or ${this.portfolioData.personal_info.phone}`;
+        }
+
+        if (keywords.education.some(keyword => message.includes(keyword))) {
+            const edu = this.portfolioData.education.masters;
+            return `Pranitha is pursuing a ${edu.degree} at ${edu.institution} (${edu.period}). Her coursework includes ${edu.relevant_coursework.join(', ')}.`;
+        }
+
+        if (keywords.skills.some(keyword => message.includes(keyword))) {
+            const skills = this.portfolioData.skills;
+            return `Pranitha is skilled in:
+            - Programming: ${skills.programming.join(', ')}
+            - ML Frameworks: ${skills.ml_frameworks.join(', ')}
+            - Databases: ${skills.databases.join(', ')}
+            - Data Analysis: ${skills.data_analysis.slice(0, 3).join(', ')} and more`;
+        }
+
+        if (keywords.experience.some(keyword => message.includes(keyword))) {
+            const exp = this.portfolioData.detailed_experience;
+            return `Pranitha's most recent roles include:
+            1. ${exp.graduate_research.title} at ${exp.graduate_research.company}
+            2. ${exp.hpc_research.title} at ${exp.hpc_research.company}
+            3. ${exp.data_analyst.title} at ${exp.data_analyst.company}
+            Would you like more details about any of these positions?`;
+        }
+
+        if (keywords.projects.some(keyword => message.includes(keyword))) {
+            const projects = this.portfolioData.projects;
+            return `Here are some of Pranitha's key projects:
+            1. ${projects.llm_chatbot.title}
+            2. ${projects.adobe_case.title}
+            3. ${projects.sales_forecasting.title}
+            Would you like to know more about any specific project?`;
+        }
+
+        if (keywords.certifications.some(keyword => message.includes(keyword))) {
+            const certs = this.portfolioData.certifications;
+            return `Pranitha holds the following certifications:
+            ${certs.map(cert => `- ${cert.name} (${cert.year})`).join('\n')}`;
+        }
+
+        if (keywords.background.some(keyword => message.includes(keyword))) {
+            return this.portfolioData.professional_summary;
+        }
+
+        // Default response if no specific match is found
+        return "I can tell you about Pranitha's education, skills, work experience, projects, or certifications. What specific aspect would you like to know more about?";
     }
 
     addMessageToChat(role, message) {
@@ -166,12 +174,6 @@ class PortfolioChatbot {
         
         chatMessages.appendChild(messageElement);
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        
-        // Add message to chat history
-        this.chatHistory.push({
-            role: role,
-            content: message
-        });
     }
 
     addTypingIndicator() {
