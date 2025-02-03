@@ -667,5 +667,16 @@
 <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/PranithaKondipamula.github.io/assets/js/chatbot.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Page loaded');
+        if (typeof PortfolioChatbot === 'undefined') {
+            console.error('Chatbot script not loaded');
+        } else {
+            console.log('Chatbot script loaded');
+        }
+    });
+</script>
+
 </body>
 </html> 
