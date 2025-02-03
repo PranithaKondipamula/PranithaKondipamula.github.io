@@ -14,31 +14,29 @@ class PortfolioChatbot {
         console.log('PortfolioChatbot: Initialization complete');
     }
 
-    async loadPortfolioData() {
+async loadPortfolioData() {
+    try {
+        const response = await fetch('/assets/pranitha_info.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        this.portfolioData = await response.json();
+        console.log('Portfolio data loaded successfully');
+    } catch (error) {
+        console.error('Error loading portfolio data:', error);
         try {
-            // Try multiple paths for GitHub Pages compatibility
-            const response = await fetch('/pranitha_info.json');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            const fallbackResponse = await fetch('../pranitha_info.json');
+            if (!fallbackResponse.ok) {
+                throw new Error(`HTTP error! status: ${fallbackResponse.status}`);
             }
-            this.portfolioData = await response.json();
-            console.log('Portfolio data loaded successfully');
-        } catch (error) {
-            console.error('Error loading portfolio data:', error);
-            // Fallback to relative path if absolute fails
-            try {
-                const fallbackResponse = await fetch('./pranitha_info.json');
-                if (!fallbackResponse.ok) {
-                    throw new Error(`HTTP error! status: ${fallbackResponse.status}`);
-                }
-                this.portfolioData = await fallbackResponse.json();
-                console.log('Portfolio data loaded successfully using fallback path');
-            } catch (fallbackError) {
-                console.error('Fallback also failed:', fallbackError);
-                this.portfolioData = {};
-            }
+            this.portfolioData = await fallbackResponse.json();
+            console.log('Portfolio data loaded successfully using fallback path');
+        } catch (fallbackError) {
+            console.error('Fallback also failed:', fallbackError);
+            this.portfolioData = {};
         }
     }
+}
 
     initializeChatbot() {
         console.log('PortfolioChatbot: Creating chat interface');
